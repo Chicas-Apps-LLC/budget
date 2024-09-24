@@ -1,74 +1,55 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  const [period, setPeriod] = useState('Monthly');
-  const [income, setIncome] = useState(0);
-  const [rent, setRent] = useState(0);
-  const [utilities, setUtilities] = useState(0); 
-  const [cars, setCars] = useState(0);
+  const [location, setLocation] = useState();
+  const [period, setPeriod] = useState();
+  const [money, setMoney] = useState(0);
 
-  const billsTotal = rent + utilities + cars;
-  const mandatoryExpensesTotal = billsTotal; // Add other mandatory expenses if applicable
-  const remainingIncome = income - mandatoryExpensesTotal; 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      location, 
+      period,
+      money,
+    };
+
+    try {
+      // Send POST request to the Django backend
+      const response = await axios.post('http://localhost:8000/api/travel-budget/', formData);
+      console.log('Data submitted successfully:', response.data);
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Travel Budget">
+      <header className="Travel Budget by Chicas Apps">
         <h1>Chicas Apps</h1>
       </header>
 
       <h2>Travel Budget</h2>
 
+      <label htmlFor='location'>Where are you traveling to?</label>
+      <select id='location' value={location} onChange={(e) => setLocation(e.target.value)}>
+        <option value="NY">New York, NY</option>
+        <option value="Miami">Miami, FL</option>
+        <option value="LA">Los Angeles, CA</option>   
+        <option value="Chicago">Chicago, IL</option>
+      </select>
+
       {/* Dropdown for budgeting period */}
       <label htmlFor="period">Period:</label>
-      <select id="period" value={period} onChange={(e) => setPeriod(e.target.value)}>
-        <option value="Daily">Daily</option>
-        <option value="Weekly">Weekly</option>
-        <option value="Monthly">Monthly</option>   
-        <option value="Yearly">Yearly</option>
-      </select>   
+      <input type="period" id="period" value={period} onChange={(e) => setPeriod(Number(e.target.value))}/>       
 
       <div> {/* Container for income */}
         <label htmlFor="money">Starting Money:</label> $
         <input type="number" id="money" value={money} onChange={(e) => setMoney(Number(e.target.value))}/>
-      </div>
-
-      <div> {/* Container for mandatory expenses */}
-        <h3>Mandatory Expenses</h3>
-        <h4>Bills</h4>
-        <p>Total: $ {billsTotal}</p>
-
-        <div>
-          <label htmlFor="rent">Rent:</label> $
-          <input type="number" id="rent" value={rent} onChange={(e) => setRent(Number(e.target.value))}/> 
-        </div>
-
-        <div>
-          <label htmlFor="utilities">Utilities:</label> $
-          <input type="number" id="utilities" value={utilities} on onChange={(e) => setUtilities(Number(e.target.value))} /> 
-        </div>
-
-        <div>
-          <label htmlFor="cars">Cars:</label> $
-          <input type="number" id="cars" value={cars} onChange={(e) => setCars(Number(e.target.value))}/> 
-        </div>
-      </div>
-
-      <p>Remaining income: $ {income - billsTotal}</p>
-
-      <h3>What else do you spend money on?</h3>
-
-      <div>
-        <label htmlFor="groceries">Groceries:</label> $
-        <input type="number" id="groceries" /> 
-      </div>
-
-      <div>
-        <label htmlFor="subs">Subscriptions:</label> $
-        <input type="number" id="groceries" /> 
-      </div>
+      </div>  
     </div>
   );
 }
