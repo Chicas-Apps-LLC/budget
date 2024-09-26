@@ -212,3 +212,39 @@ input:focus, select:focus {
   border: 1px solid #00c6ff;
 }
 
+/* Styles for smaller screens */
+@media (max-width: 768px) {
+  .expense-table {
+    width: 100%; /* Ensure the table fits within the mobile screen */
+    font-size: 14px; /* Reduce font size */
+    border-collapse: collapse;
+  }
+
+  .expense-table th, .expense-table td {
+    padding: 8px 12px; /* Reduce padding */
+    text-align: left;
+  }
+
+  .delete-button {
+    font-size: 12px; /* Adjust button size */
+    padding: 4px;
+  }
+
+  /* Make the table scrollable horizontally on mobile */
+  .expense-table-wrapper {
+    overflow-x: auto;
+  }
+
+  body {
+    font-size: 14px; /* Reduce overall font size */
+  }
+
+  .App-header h1 {
+    font-size: 24px; /* Reduce header font size */
+  }
+
+  .input-field, select {
+    font-size: 12px; /* Smaller input fields */
+  }
+
+}
