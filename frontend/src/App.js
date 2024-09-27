@@ -4,6 +4,7 @@ import axios from 'axios';
 import LocationSelector from './components/LocationSelector';
 import ExpensesTable from './components/ExpensesTable';
 import { calculateTotalExpenses } from './utils/helpers';
+import ExpensePieChart from './components/ExpensePieChart';
 
 function App() {
   const [location, setLocation] = useState('');
@@ -201,6 +202,16 @@ function App() {
         <button onClick={addExpenseRow} className="add-button">Add Expense</button> {/* Add class to Add button */}
 
         <h4 className="total">Total Expenses: ${totalExpenses.toFixed(2)}</h4> {/* Add class to total */}
+      </div>
+
+      <div className='pie-chart'>
+        <h3>Expense Distribution</h3>
+        {totalExpenses > 0 ? (
+          <ExpensePieChart expenses={expenses} />
+        ) : (
+          <p>Add expenses to see them in this section!</p>
+        )}
+        
       </div>
 
     </div>

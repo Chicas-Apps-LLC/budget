@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 .App {
   text-align: center; /* Center content */
   font-family: sans-serif;
@@ -7,7 +9,7 @@
   align-items: center; /* Center content horizontally */
   justify-content: center; /* Center content vertically */
   font-size: calc(10px + 2vmin); /* Responsive font size */
-  color: rgb(0, 0, 0); /* Text color */
+  color: rgb(255, 255, 255); /* Text color */
   background: linear-gradient(135deg, #2980b9, #16a085); /* Blueish-greenish gradient */
   max-width: 900px;
   margin: 0 auto;
@@ -48,11 +50,20 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to right, #00c6ff, #0072ff); /* A modern gradient background */
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #1d8cf8, #3358f4); /* A modern gradient background */
   color: #ffffff;
   text-align: center;
+  transition: all 0.5s ease;
   padding: 20px;
+}
+
+h1, h2, h3{
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  animation: fadeIn 0.8s ease forwards;
+  
 }
 
 h1 {
@@ -92,20 +103,22 @@ label {
 }
 
 .expense-table {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
   border-collapse: collapse;
   background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
 
 .expense-table th, .expense-table td {
-  padding: 15px;
+  padding: 10px 15px;
   text-align: center;
-  border: 1px solid #0072ff;
+  border: 1px solid #ddd;
+  color:rgb(0, 0, 0)
 }
 
 .expense-table td {
@@ -119,6 +132,10 @@ label {
 
 .expense-table, .expense-table th, .expense-table td {
   border: 3px solid black; /* Adds borders to the table, rows, and columns */
+}
+
+.expense-table thead tr {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .expense-table thead tr:hover {
@@ -136,6 +153,11 @@ label {
   box-sizing: border-box; /* Include padding and border in the total width */
 }
 
+input:focus, select:focus {
+  outline: none; 
+  border-color: #5cb85c;
+  box-shadow: 0 2px 8px rgba(0, 150,0, 0.2);
+}
 .delete-button {
   background-color: #f44336; /* Red */
   color: white;
@@ -148,11 +170,11 @@ label {
 }
 
 .delete-button:hover { 
-  background-color: #ff3333;
+  background-color: #6d0000;
 }
 
 button {
-  background-color: #00c6ff;
+  background-color: #ff4d4d;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -164,18 +186,21 @@ button {
 }
 
 button:hover {
-  background-color: #0072ff;
+  background-color: #4cae4c;
 }
 
 .add-button {
-  background-color: #4CAF50; /* Green */
+  background-color: #5cb85c;
   color: white;
+  font-weight: bold;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size:   
- 16px;
+  font-size: 16px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  display: block;
+  margin: 20px auto;
 }
 
 .total {
@@ -221,8 +246,8 @@ input:focus, select:focus {
   }
 
   .expense-table th, .expense-table td {
-    padding: 8px 12px; /* Reduce padding */
-    text-align: left;
+    font-size: 14px;
+    padding: 5px;
   }
 
   .delete-button {
@@ -247,4 +272,32 @@ input:focus, select:focus {
     font-size: 12px; /* Smaller input fields */
   }
 
+}
+
+.pie-chart {
+  margin-top: 30px;
+  padding: 20px;
+  text-align: center;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5 ease, transform 0.5s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translatey(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

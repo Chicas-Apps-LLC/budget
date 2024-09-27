@@ -47,7 +47,14 @@ const ExpensesTable = ({ expenses, category, handleExpenseChange, deleteExpenseR
                 <input
                     type="number"
                     value={expense.amount}
-                    onChange={(e) => handleExpenseChange(index, 'amount', Number(e.target.value))}
+                    onChange={(e) => {
+                    const value = Number(e.target.value);
+                    if (value >= 0) {
+                        handleExpenseChange(index, 'amount', value);
+                    } else {
+                        handleExpenseChange(index, 'amount', 0);
+                    }
+                    }}
                     placeholder="Amount"
                     className="input-field"
                 />
